@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     # AI
     GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "gemini-1.5-pro"
+    GEMINI_MODEL: str = "AQ.Ab8RN6I0YU6uZfwM0SPh6cwldf5YkXxZf3krzNapuoHYlcYWvQ"
 
     # File Storage
     UPLOAD_DIR: str = "./uploads"
