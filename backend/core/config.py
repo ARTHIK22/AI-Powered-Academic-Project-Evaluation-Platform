@@ -20,9 +20,9 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite+aiosqlite:///./projectsense.db"
 
-    # AI
-    GEMINI_API_KEY: str = ""
-    GEMINI_MODEL: str = "AQ.Ab8RN6I0YU6uZfwM0SPh6cwldf5YkXxZf3krzNapuoHYlcYWvQ"
+    # AI (Grok / xAI)
+    GROK_API_KEY: str = ""
+    GROK_MODEL: str = "grok-3"
 
     # File Storage
     UPLOAD_DIR: str = "./uploads"
