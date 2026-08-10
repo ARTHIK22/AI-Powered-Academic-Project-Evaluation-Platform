@@ -4,6 +4,9 @@ uvicorn
 python-multipart
 
 # Database
+gunicorn
+asyncpg
+psycopg2-binary
 sqlalchemy
 aiosqlite
 alembic

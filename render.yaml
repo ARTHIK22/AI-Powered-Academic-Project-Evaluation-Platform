@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: projectsense-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DEBUG
+        value: "false"
+      - key: GROK_MODEL
+        value: "grok-3"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: GROK_API_KEY
+        sync: false

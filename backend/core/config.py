@@ -10,7 +10,7 @@ class Settings(BaseSettings):
     # App
     APP_NAME: str = "ProjectSense AI"
     APP_VERSION: str = "1.0.0"
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     # Security
     SECRET_KEY: str = "dev-secret-key-change-in-production-must-be-32-chars-min"
@@ -29,7 +29,7 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE_MB: int = 50
 
     # CORS
-    CORS_ORIGINS: List[str] = ["http://localhost:3000", "http://127.0.0.1:3000"]
+    CORS_ORIGINS: List[str] = ["*"]
 
     class Config:
         env_file = ".env"
