@@ -44,9 +44,9 @@ app = FastAPI(
     description="AI-Powered Academic Project Evaluation Platform",
     version=settings.APP_VERSION,
     lifespan=lifespan,
-    docs_url="/api/docs",
-    redoc_url="/api/redoc",
-    openapi_url="/api/openapi.json",
+    docs_url="/docs",
+    redoc_url="/redoc",
+    openapi_url="/openapi.json",
 )
 
 # ── CORS ──────────────────────────────────────────────────────────────────────
@@ -63,6 +63,15 @@ app.include_router(auth_router)
 app.include_router(student_router)
 app.include_router(teacher_router)
 app.include_router(admin_router)
+
+
+@app.get("/", tags=["Health"])
+async def root():
+    return {
+        "message": "ProjectSense AI API is running",
+        "docs": "/docs",
+        "health": "/api/health",
+    }
 
 
 @app.get("/api/health", tags=["Health"])

@@ -1,27 +1,27 @@
 """
-ProjectSense AI - Gemini AI Evaluator (Core Orchestrator)
-Drives the full evaluation pipeline using Google Gemini API.
+ProjectSense AI - Grok AI Evaluator (Core Orchestrator)
+Drives the full evaluation pipeline using xAI Grok API (OpenAI-compatible).
 """
 import json
 import re
 import logging
 from typing import Any
-import google.generativeai as genai
+from openai import OpenAI
 from core.config import settings
 
 logger = logging.getLogger(__name__)
 
-# Configure Gemini
-if settings.GEMINI_API_KEY:
-    genai.configure(api_key=settings.GEMINI_API_KEY)
 
-
-def _get_model() -> genai.GenerativeModel:
-    return genai.GenerativeModel(settings.GEMINI_MODEL)
+def _get_client() -> OpenAI:
+    """Return an OpenAI client pointed at xAI's Grok endpoint."""
+    return OpenAI(
+        api_key=settings.GROK_API_KEY,
+        base_url="https://api.x.ai/v1",
+    )
 
 
 def _extract_json(text: str) -> Any:
-    """Extract JSON from Gemini response, stripping markdown fences if present."""
+    """Extract JSON from Grok response, stripping markdown fences if present."""
     text = text.strip()
     # Remove markdown code fences
     match = re.search(r"```(?:json)?\s*([\s\S]+?)\s*```", text)
@@ -37,9 +37,19 @@ def _extract_json(text: str) -> Any:
         raise
 
 
+def _chat(prompt: str) -> str:
+    """Send a prompt to Grok and return the text response."""
+    client = _get_client()
+    response = client.chat.completions.create(
+        model=settings.GROK_MODEL,
+        messages=[{"role": "user", "content": prompt}],
+    )
+    return response.choices[0].message.content
+
+
 async def evaluate_report(report_text: str, project_title: str) -> dict:
     """
-    Evaluate a project report using Gemini.
+    Evaluate a project report using Grok.
     Returns structured evaluation with scores and feedback.
     """
     prompt = f"""You are an expert academic evaluator. Analyze the following project report and provide a comprehensive evaluation.
@@ -62,9 +72,7 @@ Return ONLY valid JSON with this exact structure:
 }}"""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        return _extract_json(response.text)
+        return _extract_json(_chat(prompt))
     except Exception as e:
         logger.error(f"Report evaluation failed: {e}")
         return {
@@ -81,7 +89,7 @@ Return ONLY valid JSON with this exact structure:
 
 async def evaluate_code(code_summary: str, project_title: str) -> dict:
     """
-    Evaluate code quality using Gemini based on a code summary/excerpt.
+    Evaluate code quality using Grok based on a code summary/excerpt.
     """
     prompt = f"""You are a senior software engineer and code reviewer. Analyze this code summary for academic evaluation.
 
@@ -106,9 +114,7 @@ Return ONLY valid JSON:
 }}"""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        return _extract_json(response.text)
+        return _extract_json(_chat(prompt))
     except Exception as e:
         logger.error(f"Code evaluation failed: {e}")
         return {
@@ -146,9 +152,7 @@ Return ONLY valid JSON:
 }}"""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        return _extract_json(response.text)
+        return _extract_json(_chat(prompt))
     except Exception as e:
         logger.error(f"Innovation analysis failed: {e}")
         return {
@@ -185,9 +189,7 @@ Return ONLY valid JSON:
 Provide 3-4 questions per tier. Basic = project overview. Intermediate = design choices. Advanced = scalability, optimization, edge cases."""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        return _extract_json(response.text)
+        return _extract_json(_chat(prompt))
     except Exception as e:
         logger.error(f"Viva generation failed: {e}")
         return {
@@ -249,9 +251,7 @@ Return ONLY valid JSON mapping criterion name to predicted score:
 }}"""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        result = _extract_json(response.text)
+        result = _extract_json(_chat(prompt))
         return result
     except Exception as e:
         logger.error(f"Marks prediction failed: {e}")
@@ -290,9 +290,7 @@ Return ONLY a valid JSON array of suggestion strings (8-12 suggestions):
 ["suggestion 1", "suggestion 2", ...]"""
 
     try:
-        model = _get_model()
-        response = model.generate_content(prompt)
-        return _extract_json(response.text)
+        return _extract_json(_chat(prompt))
     except Exception as e:
         logger.error(f"Suggestions generation failed: {e}")
         suggestions = []
