@@ -37,11 +37,23 @@ class Settings(BaseSettings):
 
     @field_validator("CORS_ORIGINS", mode="before")
     def parse_cors_origins(cls, value):
+        if value is None:
+            return cls.__fields__["CORS_ORIGINS"].default
+
         if isinstance(value, str):
+            stripped_value = value.strip()
+            if not stripped_value:
+                return cls.__fields__["CORS_ORIGINS"].default
+
             try:
-                return json.loads(value)
+                parsed = json.loads(stripped_value)
             except json.JSONDecodeError:
-                return [origin.strip() for origin in value.split(",") if origin.strip()]
+                return [origin.strip() for origin in stripped_value.split(",") if origin.strip()]
+
+            if isinstance(parsed, list):
+                return parsed
+            return [str(parsed)]
+
         return value
 
     class Config:
