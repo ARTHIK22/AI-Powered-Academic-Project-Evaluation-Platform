@@ -1,7 +1,7 @@
 """
 ProjectSense AI - Application Configuration
 """
-from pydantic import field_validator
+from pydantic import field_validator, Field
 from pydantic_settings import BaseSettings
 from typing import List
 import json
@@ -29,32 +29,50 @@ class Settings(BaseSettings):
     UPLOAD_DIR: str = "./uploads"
     MAX_FILE_SIZE_MB: int = 50
 
-    # CORS
-    CORS_ORIGINS: List[str] = [
-        "http://localhost:3000",
-        "https://ai-power-academic-project-evaluatio.vercel.app",
-    ]
+    # CORS: store raw env value here (avoids pydantic-settings pre-decoding errors)
+    CORS_ORIGINS_RAW: str = Field(
+        '["http://localhost:3000", "https://ai-power-academic-project-evaluatio.vercel.app"]',
+        env="CORS_ORIGINS",
+    )
 
-    @field_validator("CORS_ORIGINS", mode="before")
-    def parse_cors_origins(cls, value):
+    def _parse_cors_raw(self) -> List[str]:
+        default = [
+            "http://localhost:3000",
+            "https://ai-power-academic-project-evaluatio.vercel.app",
+        ]
+
+        value = getattr(self, "CORS_ORIGINS_RAW", None)
         if value is None:
-            return cls.__fields__["CORS_ORIGINS"].default
+            return default
 
+        # If it's already a list (unlikely for RAW field), return as-is
+        if isinstance(value, list):
+            return value
+
+        # Parse string: allow JSON array, comma-separated list, or single URL
         if isinstance(value, str):
-            stripped_value = value.strip()
-            if not stripped_value:
-                return cls.__fields__["CORS_ORIGINS"].default
+            s = value.strip()
+            if not s:
+                return default
 
             try:
-                parsed = json.loads(stripped_value)
-            except json.JSONDecodeError:
-                return [origin.strip() for origin in stripped_value.split(",") if origin.strip()]
+                parsed = json.loads(s)
+            except Exception:
+                return [origin.strip() for origin in s.split(",") if origin.strip()]
 
             if isinstance(parsed, list):
                 return parsed
             return [str(parsed)]
 
-        return value
+        # Fallback
+        try:
+            return list(value)
+        except Exception:
+            return default
+
+    @property
+    def CORS_ORIGINS(self) -> List[str]:
+        return self._parse_cors_raw()
 
     class Config:
         env_file = ".env"
