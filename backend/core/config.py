@@ -1,6 +1,7 @@
 """
 ProjectSense AI - Application Configuration
 """
+from pydantic import field_validator
 from pydantic_settings import BaseSettings
 from typing import List
 import json
@@ -29,7 +30,16 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE_MB: int = 50
 
     # CORS
-    CORS_ORIGINS: List[str] = ["*"]
+    CORS_ORIGINS: List[str] = ["http://localhost:3000"]
+
+    @field_validator("CORS_ORIGINS", mode="before")
+    def parse_cors_origins(cls, value):
+        if isinstance(value, str):
+            try:
+                return json.loads(value)
+            except json.JSONDecodeError:
+                return [origin.strip() for origin in value.split(",") if origin.strip()]
+        return value
 
     class Config:
         env_file = ".env"

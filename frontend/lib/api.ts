@@ -3,7 +3,7 @@
  * Centralized Axios-style fetch wrapper for all backend calls.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
@@ -21,14 +21,23 @@ async function apiFetch<T>(
     ...(options.headers || {}),
   };
 
-  const res = await fetch(`${API_BASE}${path}`, { ...options, headers });
+  const url = `${API_BASE}${path}`;
+  let res: Response;
 
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({ detail: "Request failed" }));
-    throw new Error(err.detail || `HTTP ${res.status}`);
+  try {
+    res = await fetch(url, { ...options, headers });
+  } catch (error) {
+    throw new Error(
+      "Unable to reach the backend. Please verify the API URL and network connection."
+    );
   }
 
-  // Return raw Response for blob downloads
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({ detail: res.statusText || "Request failed" }));
+    const detail = err?.detail || err?.message || `HTTP ${res.status}`;
+    throw new Error(typeof detail === "string" ? detail : `HTTP ${res.status}`);
+  }
+
   if (res.headers.get("Content-Type")?.includes("application/pdf")) {
     return res as unknown as T;
   }
