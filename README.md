@@ -45,7 +45,8 @@ ProjectSense AI helps academic institutions evaluate student capstone/mini proje
 
 ## 🏗️ Architecture
 
-![ProjectSense AI architecture](docs/images/architecture.svg)
+<img width="886" height="302" alt="image" src="https://github.com/user-attachments/assets/4e51002a-db12-423e-98c2-dac6bbb23dff" />
+
 
 Students submit reports, code, and slides through the Next.js frontend. The FastAPI backend stores project metadata in the database and sends each artifact to the xAI Grok API for evaluation, then returns rubric-based scores, feedback, and viva questions.
 
