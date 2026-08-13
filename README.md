@@ -43,7 +43,8 @@ Login Dashboard
 | Student dashboard | Teacher review | Evaluation results |
 |---|---|---|
 | <img width="1913" height="914" alt="Screenshot 2026-08-13 221010" src="https://github.com/user-attachments/assets/10801cfc-81cd-4bb7-9378-8fec98b1e1ec" />
-| | <img width="1912" height="912" alt="Screenshot 2026-08-13 223453" src="https://github.com/user-attachments/assets/c41f47b6-a0c6-4e63-81d9-261f4fefa208" />
+|<img width="1919" height="913" alt="Screenshot 2026-08-13 223403 - Copy" src="https://github.com/user-attachments/assets/4f532aa3-78ea-4721-ba79-d7c6ddb6bc91" />
+ | <img width="1912" height="912" alt="Screenshot 2026-08-13 223453" src="https://github.com/user-attachments/assets/c41f47b6-a0c6-4e63-81d9-261f4fefa208" />
 |
 
 ---
