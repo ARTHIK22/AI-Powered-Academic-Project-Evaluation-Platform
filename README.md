@@ -38,8 +38,6 @@ Login Dashboard
 <img width="1919" height="914" alt="Screenshot 2026-08-13 223138" src="https://github.com/user-attachments/assets/cd96b5e5-1dba-430e-b3cf-5966effec8c8" />
 
 
-> Add real screenshots of your deployed app here. Drop image files into `docs/images/` and update the paths below — e.g. `docs/images/student-dashboard.png`.
-
 | Student dashboard | Teacher review | Evaluation results |
 |---|---|---|
 | <img width="1913" height="914" alt="Screenshot 2026-08-13 221010" src="https://github.com/user-attachments/assets/10801cfc-81cd-4bb7-9378-8fec98b1e1ec" />
