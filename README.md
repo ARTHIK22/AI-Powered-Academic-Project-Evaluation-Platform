@@ -199,13 +199,6 @@ Make sure `CORS_ORIGINS` on the backend includes your deployed frontend URL, and
 
 Contributions are welcome! Please open an issue to discuss any major changes before submitting a pull request.
 
-1. Fork the repo
-2. Create a feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes
-4. Push and open a Pull Request
-
----
-
-## 📄 License
-
-No license has been specified for this project yet. Please add a `LICENSE` file if you intend to open-source it.
+1. Create a feature branch (`git checkout -b feature/my-feature`)
+2. Commit your changes
+3. Push and open a Pull Request
