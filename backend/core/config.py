@@ -31,13 +31,14 @@ class Settings(BaseSettings):
 
     # CORS: store raw env value here (avoids pydantic-settings pre-decoding errors)
     CORS_ORIGINS_RAW: str = Field(
-        '["http://localhost:3000", "https://ai-powered-academic-project-evaluation.onrender.com"]',
+        '["http://localhost:3000", "https://ai-powered-academic-project-evaluat.vercel.app", "https://ai-powered-academic-project-evaluation.onrender.com"]',
         env="CORS_ORIGINS",
     )
 
     def _parse_cors_raw(self) -> List[str]:
         default = [
             "http://localhost:3000",
+            "https://ai-powered-academic-project-evaluat.vercel.app",
             "https://ai-powered-academic-project-evaluation.onrender.com",
         ]
 

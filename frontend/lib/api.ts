@@ -3,7 +3,9 @@
  * Centralized Axios-style fetch wrapper for all backend calls.
  */
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "http://localhost:8000";
+const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ||
+  "https://ai-powered-academic-project-evaluation.onrender.com";
 
 function getToken(): string | null {
   if (typeof window === "undefined") return null;
