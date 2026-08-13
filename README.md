@@ -34,12 +34,17 @@ ProjectSense AI helps academic institutions evaluate student capstone/mini proje
 ---
 
 ## 🖼️ Screenshots
+Login Dashboard
+<img width="1919" height="914" alt="Screenshot 2026-08-13 223138" src="https://github.com/user-attachments/assets/cd96b5e5-1dba-430e-b3cf-5966effec8c8" />
+
 
 > Add real screenshots of your deployed app here. Drop image files into `docs/images/` and update the paths below — e.g. `docs/images/student-dashboard.png`.
 
 | Student dashboard | Teacher review | Evaluation results |
 |---|---|---|
-| ![Student dashboard](docs/images/student-dashboard.png) | ![Teacher review](docs/images/teacher-review.png) | ![Evaluation results](docs/images/evaluation-results.png) |
+| <img width="1913" height="914" alt="Screenshot 2026-08-13 221010" src="https://github.com/user-attachments/assets/10801cfc-81cd-4bb7-9378-8fec98b1e1ec" />
+| | <img width="1912" height="912" alt="Screenshot 2026-08-13 223453" src="https://github.com/user-attachments/assets/c41f47b6-a0c6-4e63-81d9-261f4fefa208" />
+|
 
 ---
 
