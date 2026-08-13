@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "ProjectSense AI — AI-Powered Academic Project Evaluation",
   description:
-    "Evaluate academic projects instantly with AI. Get predicted marks, viva questions, code analysis, and detailed feedback powered by Gemini AI.",
+    "Evaluate academic projects instantly with AI. Get predicted marks, viva questions, code analysis, and detailed feedback powered by ARTHIK.",
 };
 
 const features = [
@@ -55,7 +55,7 @@ const stats = [
 
 const workflow = [
   { step: "01", title: "Upload Project", desc: "Submit your report (PDF/DOCX), source code (ZIP or GitHub), and PPT.", icon: "📤" },
-  { step: "02", title: "AI Evaluates", desc: "Our Gemini-powered engine analyzes every aspect of your submission.", icon: "🤖" },
+  { step: "02", title: "AI Evaluates", desc: "Our ARTHIK-powered engine analyzes every aspect of your submission.", icon: "🤖" },
   { step: "03", title: "Receive Insights", desc: "Get predicted marks, strengths, weaknesses, and viva questions instantly.", icon: "📊" },
   { step: "04", title: "Teacher Reviews", desc: "Instructors review AI scores, adjust marks, add comments, and export PDF reports.", icon: "👨‍🏫" },
 ];
@@ -118,7 +118,7 @@ export default function LandingPage() {
             }}
           >
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-            Powered by Google Gemini AI
+            Powered by ARTHIK
           </div>
 
           <h1 className="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-tight mb-6">

@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "ProjectSense AI — Academic Project Evaluation Platform",
   description:
-    "AI-powered platform for evaluating academic projects. Get instant scores, viva questions, code analysis, and actionable feedback powered by Gemini AI.",
+    "AI-powered platform for evaluating academic projects. Get instant scores, viva questions, code analysis, and actionable feedback powered by ARTHIK.",
   keywords: ["academic evaluation", "AI project review", "viva questions", "code analysis"],
   openGraph: {
     title: "ProjectSense AI",
