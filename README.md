@@ -194,11 +194,3 @@ Full interactive API documentation is available at `/docs` (Swagger) and `/redoc
 Make sure `CORS_ORIGINS` on the backend includes your deployed frontend URL, and `NEXT_PUBLIC_API_URL` on the frontend points to your deployed backend URL.
 
 ---
-
-## 🤝 Contributing
-
-Contributions are welcome! Please open an issue to discuss any major changes before submitting a pull request.
-
-1. Create a feature branch (`git checkout -b feature/my-feature`)
-2. Commit your changes
-3. Push and open a Pull Request
